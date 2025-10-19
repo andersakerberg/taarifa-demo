@@ -122,7 +122,7 @@ export default function ProductsPage() {
       ) : (
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.id} className="product-card" style={{ position: 'relative', paddingBottom: '60px' }}>
+            <div key={product.id} className="product-card" style={{ position: 'relative', paddingBottom: '80px', minHeight: '500px' }}>
               {/* Taarifa ribbon icon */}
               <div className="taarifa-ribbon">
                 <img 
@@ -151,8 +151,14 @@ export default function ProductsPage() {
                 wordBreak: 'break-all'
               }}>{product.hash}</code></p>
 
+              {/* Spacer to push QR section to consistent position */}
+              <div style={{ height: '20px' }}></div>
+
               <div style={{ 
-                marginTop: '20px', 
+                position: 'absolute',
+                top: '200px', // Fixed position from top
+                left: '15px',
+                right: '15px',
                 display: 'flex', 
                 flexDirection: 'column', 
                 gap: '20px',
