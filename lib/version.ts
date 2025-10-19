@@ -9,7 +9,7 @@ export const VERSION = {
   // Static version info
   major: 1,
   minor: 0,
-  patch: 14,
+  patch: 15,
   // Get full version string
   get full() {
     return `${this.major}.${this.minor}.${this.patch}-${this.hash}`;
