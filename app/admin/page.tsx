@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { addProduct, getAllProducts, Product } from '@/lib/storage';
 import { getAssetPath, getPagePath } from '@/lib/utils';
+import VersionBadge from '@/components/VersionBadge';
 
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -117,6 +118,7 @@ export default function AdminPage() {
 
   return (
     <div className="container">
+      <VersionBadge />
       <div className="navigation" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <a href={getPagePath('/')}>Home</a>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getAssetPath, getPagePath } from '@/lib/utils';
+import VersionBadge from '@/components/VersionBadge';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -32,6 +33,7 @@ export default function LoginPage() {
 
   return (
     <div className="container">
+      <VersionBadge />
       <div className="form-container">
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
           <img 

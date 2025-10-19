@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getProductByHash } from '@/lib/storage';
 import { getAssetPath, getPagePath } from '@/lib/utils';
+import VersionBadge from '@/components/VersionBadge';
 
 function ProductContent() {
   const searchParams = useSearchParams();
@@ -51,6 +52,7 @@ function ProductContent() {
 
   return (
     <div className="container">
+      <VersionBadge />
       <div className="navigation">
         <a href={getPagePath('/')}>Home</a>
         <a href={getPagePath('/products')}>View All Products</a>

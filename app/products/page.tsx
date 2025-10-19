@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { getAllProducts, Product } from '@/lib/storage';
 import { getAssetPath, getPagePath } from '@/lib/utils';
+import VersionBadge from '@/components/VersionBadge';
 import QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
 
@@ -72,6 +73,7 @@ export default function ProductsPage() {
   if (!isClient) {
     return (
       <div className="container">
+        <VersionBadge />
         <div className="navigation">
           <a href={getPagePath('/')}>Home</a>
           <a href={getPagePath('/admin')}>Admin Panel</a>
@@ -85,6 +87,7 @@ export default function ProductsPage() {
 
   return (
     <div className="container">
+      <VersionBadge />
       <div className="navigation">
         <a href={getPagePath('/')}>Home</a>
         <a href={getPagePath('/admin')}>Admin Panel</a>
