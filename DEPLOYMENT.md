@@ -4,7 +4,7 @@ This guide explains how to deploy the Taarifa Product Management System to GitHu
 
 ## Prerequisites
 
-1. A GitHub repository named `Taarifa` (case-sensitive)
+1. A GitHub repository named `taarifa-demo` (case-sensitive)
 2. GitHub Pages enabled in your repository settings
 3. The repository should be public (required for free GitHub Pages)
 
@@ -21,7 +21,7 @@ This guide explains how to deploy the Taarifa Product Management System to GitHu
 ### 2. Configure Repository Settings
 
 The workflow is already configured to deploy to GitHub Pages. The app will be available at:
-`https://[your-username].github.io/Taarifa/`
+`https://[your-username].github.io/taarifa-demo/`
 
 ### 3. Push to Main Branch
 
@@ -48,7 +48,7 @@ The app is configured for static export with:
 - `output: 'export'` - Generates static files
 - `trailingSlash: true` - Adds trailing slashes to URLs
 - `images: { unoptimized: true }` - Disables image optimization for static export
-- `basePath: '/Taarifa'` - Sets the base path for GitHub Pages
+- `basePath: '/taarifa-demo'` - Sets the base path for GitHub Pages
 
 ### GitHub Actions Workflow
 
@@ -69,7 +69,7 @@ The workflow (`.github/workflows/deploy.yml`) includes:
 
 ### Common Issues
 
-1. **404 Errors**: Make sure the repository name is exactly `Taarifa` (case-sensitive)
+1. **404 Errors**: Make sure the repository name is exactly `taarifa-demo` (case-sensitive)
 2. **Build Failures**: Check the Actions tab for error details
 3. **Routing Issues**: Ensure all links use relative paths
 
@@ -104,6 +104,6 @@ If you want to use a custom domain:
 
 For production builds, the app automatically uses:
 - `NODE_ENV=production` - Enables production optimizations
-- `basePath=/Taarifa` - Sets the correct base path for GitHub Pages
+- `basePath=/taarifa-demo` - Sets the correct base path for GitHub Pages
 
 No additional environment variables are required for basic functionality.

@@ -59,7 +59,7 @@ A React Next.js application for managing products with QR codes and barcodes. Th
 The app is configured for automatic deployment to GitHub Pages:
 
 1. **Push to main branch** - The workflow will automatically deploy
-2. **Access your app** at `https://[your-username].github.io/Taarifa/`
+2. **Access your app** at `https://[your-username].github.io/taarifa-demo/`
 
 For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
