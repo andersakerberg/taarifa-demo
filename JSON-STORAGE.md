@@ -5,7 +5,7 @@ This project uses a JSON file-based storage system for managing products instead
 ## How It Works
 
 ### Data Storage
-- **Primary storage**: `data/products.json` - JSON file containing all products
+- **Primary storage**: `public/products.json` - JSON file containing all products
 - **Backup storage**: localStorage - Fallback for client-side operations
 - **Management script**: `scripts/manage-products.js` - Command-line tool for managing products
 
@@ -85,7 +85,7 @@ const product = await getProductByHash("hash123");
 
 ## File Structure
 ```
-data/
+public/
   products.json          # Main data file
 lib/
   json-storage.ts        # Storage API functions
@@ -95,7 +95,7 @@ scripts/
 
 ## Data Flow
 
-1. **App loads** → Fetches data from `data/products.json`
+1. **App loads** → Fetches data from `public/products.json`
 2. **User adds product** → Updates localStorage backup
 3. **Data persists** → JSON file remains unchanged (client-side only)
 4. **Manual updates** → Use management script to update JSON file

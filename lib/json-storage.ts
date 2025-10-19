@@ -11,7 +11,7 @@ export interface Product {
   createdAt: string; // ISO date string
 }
 
-const JSON_FILE_PATH = '/data/products.json';
+const JSON_FILE_PATH = '/products.json';
 
 /**
  * Get all products from the JSON file

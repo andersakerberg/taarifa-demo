@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const PRODUCTS_FILE = path.join(__dirname, '..', 'data', 'products.json');
+const PRODUCTS_FILE = path.join(__dirname, '..', 'public', 'products.json');
 
 /**
  * Load products from JSON file
