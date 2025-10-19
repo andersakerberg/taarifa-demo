@@ -9,7 +9,10 @@
     "prebuild": "node scripts/generate-version.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "version:patch": "node scripts/increment-version.js patch",
+    "version:minor": "node scripts/increment-version.js minor",
+    "version:major": "node scripts/increment-version.js major"
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
