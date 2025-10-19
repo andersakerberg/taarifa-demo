@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAssetPath } from '@/lib/utils';
+import { getAssetPath, getPagePath } from '@/lib/utils';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -94,7 +94,7 @@ export default function LoginPage() {
         </form>
 
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
-          <a href="/products" className="btn btn-secondary" style={{ width: '100%', display: 'block' }}>View All Products</a>
+                  <a href={getPagePath('/products')} className="btn btn-secondary" style={{ width: '100%', display: 'block' }}>View All Products</a>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getProductByHash } from '@/lib/storage';
-import { getAssetPath } from '@/lib/utils';
+import { getAssetPath, getPagePath } from '@/lib/utils';
 
 function ProductContent() {
   const searchParams = useSearchParams();
@@ -41,8 +41,8 @@ function ProductContent() {
             The product code you entered is invalid or does not exist.
           </p>
           <div style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <a href="/" className="btn" style={{ width: '100%', display: 'block', textAlign: 'center' }}>Go Home</a>
-            <a href="/products" className="btn btn-secondary" style={{ width: '100%', display: 'block', textAlign: 'center' }}>View All Products</a>
+            <a href={getPagePath('/')} className="btn" style={{ width: '100%', display: 'block', textAlign: 'center' }}>Go Home</a>
+            <a href={getPagePath('/products')} className="btn btn-secondary" style={{ width: '100%', display: 'block', textAlign: 'center' }}>View All Products</a>
           </div>
         </div>
       </div>
@@ -52,8 +52,8 @@ function ProductContent() {
   return (
     <div className="container">
       <div className="navigation">
-        <a href="/">Home</a>
-        <a href="/products">View All Products</a>
+        <a href={getPagePath('/')}>Home</a>
+        <a href={getPagePath('/products')}>View All Products</a>
       </div>
 
       <div className="product-card" style={{ maxWidth: '600px', margin: '50px auto', position: 'relative' }}>
@@ -85,7 +85,7 @@ function ProductContent() {
         </div>
 
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
-          <a href="/products" className="btn btn-secondary" style={{ width: '100%', display: 'block' }}>
+          <a href={getPagePath('/products')} className="btn btn-secondary" style={{ width: '100%', display: 'block' }}>
             View All Products
           </a>
         </div>

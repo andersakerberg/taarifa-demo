@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { addProduct, getAllProducts, Product } from '@/lib/storage';
-import { getAssetPath } from '@/lib/utils';
+import { getAssetPath, getPagePath } from '@/lib/utils';
 
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -119,8 +119,8 @@ export default function AdminPage() {
     <div className="container">
       <div className="navigation" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <a href="/">Home</a>
-          <a href="/products">View All Products</a>
+          <a href={getPagePath('/')}>Home</a>
+          <a href={getPagePath('/products')}>View All Products</a>
         </div>
         
         <div ref={avatarRef} style={{ position: 'relative' }}>
@@ -308,7 +308,7 @@ export default function AdminPage() {
                 wordBreak: 'break-all'
               }}>{product.hash}</code></p>
               <a 
-                href={`/product?hash=${product.hash}`} 
+                href={`${getPagePath('/product')}?hash=${product.hash}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-secondary"

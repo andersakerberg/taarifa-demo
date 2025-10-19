@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getAllProducts, Product } from '@/lib/storage';
-import { getAssetPath } from '@/lib/utils';
+import { getAssetPath, getPagePath } from '@/lib/utils';
 import QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
 
@@ -24,7 +24,7 @@ export default function ProductsPage() {
       
       for (const product of products) {
         try {
-          const productUrl = `${window.location.origin}/product?hash=${product.hash}`;
+          const productUrl = `${window.location.origin}${getPagePath('/product')}?hash=${product.hash}`;
           const qrCodeDataURL = await QRCode.toDataURL(productUrl, {
             width: 200,
             margin: 2,
@@ -73,8 +73,8 @@ export default function ProductsPage() {
     return (
       <div className="container">
         <div className="navigation">
-          <a href="/">Home</a>
-          <a href="/admin">Admin Panel</a>
+          <a href={getPagePath('/')}>Home</a>
+          <a href={getPagePath('/admin')}>Admin Panel</a>
         </div>
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
           <h2>Loading...</h2>
@@ -86,8 +86,8 @@ export default function ProductsPage() {
   return (
     <div className="container">
       <div className="navigation">
-        <a href="/">Home</a>
-        <a href="/admin">Admin Panel</a>
+        <a href={getPagePath('/')}>Home</a>
+        <a href={getPagePath('/admin')}>Admin Panel</a>
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '30px' }}>
@@ -105,7 +105,7 @@ export default function ProductsPage() {
         <div style={{ textAlign: 'center', marginTop: '50px', color: '#333' }}>
           <h2 style={{ color: '#333' }}>No products found</h2>
           <p style={{ color: '#666' }}>Products will appear here once they are added through the admin panel.</p>
-          <a href="/admin" className="btn" style={{ width: '100%', display: 'block' }}>Go to Admin Panel</a>
+          <a href={getPagePath('/admin')} className="btn" style={{ width: '100%', display: 'block' }}>Go to Admin Panel</a>
         </div>
       ) : (
         <div className="product-list">
@@ -177,7 +177,7 @@ export default function ProductsPage() {
 
               <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <a 
-                  href={`/product?hash=${product.hash}`} 
+                  href={`${getPagePath('/product')}?hash=${product.hash}`} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="btn btn-secondary"
