@@ -8,16 +8,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next build",
-    "build:prod": "NODE_ENV=production next build",
-    "test:build": "npm run build:prod && ls -la out/",
-    "build:static": "next build && next export"
+    "lint": "next lint"
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
     "jsbarcode": "^3.11.5",
-    "next": "13.5.6",
+    "next": "14.2.15",
     "qrcode": "^1.5.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
@@ -29,7 +25,7 @@
     "@types/react": "18.3.26",
     "@types/react-dom": "^18.0.0",
     "eslint": "^8.0.0",
-    "eslint-config-next": "^13.5.6",
+    "eslint-config-next": "^14.2.15",
     "typescript": "5.9.3"
   }
 }

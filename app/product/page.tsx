@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { getProductByHash } from '../lib/storage';
+import { getProductByHash } from '@/lib/storage';
 
 function ProductContent() {
   const searchParams = useSearchParams();

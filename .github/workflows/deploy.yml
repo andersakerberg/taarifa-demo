@@ -74,8 +74,8 @@ jobs:
           # Set environment variables for production build
           export NODE_ENV=production
           export NEXT_TELEMETRY_DISABLED=1
-          # Try building with the build script
-          ./build.sh
+          # Build the application
+          npm run build
 
       - name: Verify build output
         run: |

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getAllProducts, Product } from '../lib/storage';
+import { getAllProducts, Product } from '@/lib/storage';
 import QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
 
