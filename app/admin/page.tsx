@@ -14,6 +14,7 @@ export default function AdminPage() {
     description: ''
   });
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const avatarRef = useRef<HTMLDivElement>(null);
@@ -289,6 +290,24 @@ export default function AdminPage() {
               lineHeight: '1.4'
             }}>
               {message}
+            </div>
+          )}
+
+          {error && (
+            <div style={{ 
+              marginTop: '20px', 
+              padding: '10px', 
+              backgroundColor: '#f8d7da',
+              color: '#721c24',
+              borderRadius: '5px',
+              border: '1px solid #f5c6cb',
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              maxWidth: '100%',
+              fontSize: '14px',
+              lineHeight: '1.4'
+            }}>
+              {error}
             </div>
           )}
         </form>
