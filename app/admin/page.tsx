@@ -334,7 +334,7 @@ export default function AdminPage() {
         <h2>Current Products ({products.length})</h2>
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.id} className="product-card" style={{ position: 'relative' }}>
+            <div key={product.id} className="product-card" style={{ position: 'relative', paddingBottom: '60px' }}>
               {/* Delete button - top left */}
               <button
                 onClick={() => handleDeleteProduct(product.id, product.name)}
@@ -396,7 +396,16 @@ export default function AdminPage() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
-                style={{ width: '100%', display: 'block', textAlign: 'center' }}
+                style={{ 
+                  width: '100%', 
+                  display: 'block', 
+                  textAlign: 'center',
+                  position: 'absolute',
+                  bottom: '15px',
+                  left: '15px',
+                  right: '15px',
+                  marginTop: 'auto'
+                }}
               >
                 View Product
               </a>

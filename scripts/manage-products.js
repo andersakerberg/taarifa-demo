@@ -78,6 +78,21 @@ function clearProducts() {
 }
 
 /**
+ * Sync from localStorage backup (if available)
+ */
+function syncFromBackup() {
+  try {
+    // This would need to be run in a browser context to access localStorage
+    console.log('To sync from localStorage backup:');
+    console.log('1. Open browser dev tools');
+    console.log('2. Run: JSON.parse(localStorage.getItem("taarifa_products_backup"))');
+    console.log('3. Copy the result and save it to products.json');
+  } catch (error) {
+    console.error('Error syncing from backup:', error.message);
+  }
+}
+
+/**
  * Generate hash
  */
 function generateHash(input) {
@@ -112,10 +127,15 @@ switch (command) {
     clearProducts();
     break;
     
+  case 'sync':
+    syncFromBackup();
+    break;
+    
   default:
     console.log('Usage:');
     console.log('  node scripts/manage-products.js add "Name" "Description"  - Add a product');
     console.log('  node scripts/manage-products.js list                      - List all products');
     console.log('  node scripts/manage-products.js clear                     - Clear all products');
+    console.log('  node scripts/manage-products.js sync                      - Show sync instructions');
     break;
 }
