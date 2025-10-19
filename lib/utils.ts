@@ -5,8 +5,12 @@
  */
 export function getAssetPath(path: string): string {
   // Check if we're in production (GitHub Pages)
-  if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
-    return `/taarifa-demo${path}`;
+  if (typeof window !== 'undefined') {
+    // Check for GitHub Pages deployment
+    if (window.location.hostname.includes('github.io') || 
+        window.location.pathname.startsWith('/taarifa-demo')) {
+      return `/taarifa-demo${path}`;
+    }
   }
   
   // For development or other environments
@@ -20,8 +24,12 @@ export function getAssetPath(path: string): string {
  */
 export function getPagePath(path: string): string {
   // Check if we're in production (GitHub Pages)
-  if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
-    return `/taarifa-demo${path}`;
+  if (typeof window !== 'undefined') {
+    // Check for GitHub Pages deployment
+    if (window.location.hostname.includes('github.io') || 
+        window.location.pathname.startsWith('/taarifa-demo')) {
+      return `/taarifa-demo${path}`;
+    }
   }
   
   // For development or other environments
