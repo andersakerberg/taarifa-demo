@@ -219,3 +219,25 @@ code {
 .navigation a {
   color: #007bff;
 }
+
+/* Taarifa ribbon icon styles */
+.taarifa-ribbon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+
+.taarifa-ribbon:hover {
+  transform: scale(1.1);
+}
+
+.taarifa-ribbon img {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  transition: filter 0.2s ease;
+}
+
+.taarifa-ribbon:hover img {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}

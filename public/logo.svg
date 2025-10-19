@@ -1,0 +1,112 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007bff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0056b3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#00ff88;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00ff88;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#bgGradient)" stroke="#ffffff" stroke-width="4"/>
+  
+  <!-- QR Code representation (simplified) -->
+  <g transform="translate(50, 50)">
+    <!-- QR Code pattern -->
+    <rect x="0" y="0" width="100" height="100" fill="#ffffff" rx="8"/>
+    
+    <!-- QR Code modules -->
+    <rect x="8" y="8" width="12" height="12" fill="#000000"/>
+    <rect x="24" y="8" width="12" height="12" fill="#000000"/>
+    <rect x="40" y="8" width="12" height="12" fill="#000000"/>
+    <rect x="56" y="8" width="12" height="12" fill="#000000"/>
+    <rect x="72" y="8" width="12" height="12" fill="#000000"/>
+    <rect x="88" y="8" width="4" height="4" fill="#000000"/>
+    
+    <rect x="8" y="24" width="12" height="12" fill="#000000"/>
+    <rect x="32" y="24" width="12" height="12" fill="#000000"/>
+    <rect x="48" y="24" width="12" height="12" fill="#000000"/>
+    <rect x="72" y="24" width="12" height="12" fill="#000000"/>
+    <rect x="88" y="24" width="4" height="4" fill="#000000"/>
+    
+    <rect x="8" y="40" width="12" height="12" fill="#000000"/>
+    <rect x="24" y="40" width="12" height="12" fill="#000000"/>
+    <rect x="40" y="40" width="12" height="12" fill="#000000"/>
+    <rect x="56" y="40" width="12" height="12" fill="#000000"/>
+    <rect x="72" y="40" width="12" height="12" fill="#000000"/>
+    <rect x="88" y="40" width="4" height="4" fill="#000000"/>
+    
+    <rect x="8" y="56" width="12" height="12" fill="#000000"/>
+    <rect x="32" y="56" width="12" height="12" fill="#000000"/>
+    <rect x="48" y="56" width="12" height="12" fill="#000000"/>
+    <rect x="72" y="56" width="12" height="12" fill="#000000"/>
+    <rect x="88" y="56" width="4" height="4" fill="#000000"/>
+    
+    <rect x="8" y="72" width="12" height="12" fill="#000000"/>
+    <rect x="24" y="72" width="12" height="12" fill="#000000"/>
+    <rect x="40" y="72" width="12" height="12" fill="#000000"/>
+    <rect x="56" y="72" width="12" height="12" fill="#000000"/>
+    <rect x="72" y="72" width="12" height="12" fill="#000000"/>
+    <rect x="88" y="72" width="4" height="4" fill="#000000"/>
+    
+    <rect x="8" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="16" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="24" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="32" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="40" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="48" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="56" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="64" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="72" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="80" y="88" width="4" height="4" fill="#000000"/>
+    <rect x="88" y="88" width="4" height="4" fill="#000000"/>
+  </g>
+  
+  <!-- Barcode representation -->
+  <g transform="translate(60, 160)">
+    <rect x="0" y="0" width="80" height="20" fill="#ffffff" rx="2"/>
+    <rect x="2" y="2" width="2" height="16" fill="#000000"/>
+    <rect x="6" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="9" y="2" width="3" height="16" fill="#000000"/>
+    <rect x="14" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="17" y="2" width="2" height="16" fill="#000000"/>
+    <rect x="21" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="24" y="2" width="3" height="16" fill="#000000"/>
+    <rect x="29" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="32" y="2" width="2" height="16" fill="#000000"/>
+    <rect x="36" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="39" y="2" width="3" height="16" fill="#000000"/>
+    <rect x="44" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="47" y="2" width="2" height="16" fill="#000000"/>
+    <rect x="51" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="54" y="2" width="3" height="16" fill="#000000"/>
+    <rect x="59" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="62" y="2" width="2" height="16" fill="#000000"/>
+    <rect x="66" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="69" y="2" width="3" height="16" fill="#000000"/>
+    <rect x="74" y="2" width="1" height="16" fill="#000000"/>
+    <rect x="77" y="2" width="1" height="16" fill="#000000"/>
+  </g>
+  
+  <!-- Scanning laser beam effect -->
+  <g transform="translate(50, 50)">
+    <rect x="0" y="0" width="100" height="2" fill="url(#scanGradient)" opacity="0.8">
+      <animate attributeName="y" values="0;98;0" dur="2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  <!-- Verification checkmark -->
+  <g transform="translate(160, 40)">
+    <circle cx="20" cy="20" r="18" fill="#00ff88" stroke="#ffffff" stroke-width="3"/>
+    <path d="M12 20 L18 26 L28 16" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Company name -->
+  <text x="100" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff">TAARIFA</text>
+  <text x="100" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">SCAN • VERIFY • TRACK</text>
+</svg>

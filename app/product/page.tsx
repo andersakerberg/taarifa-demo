@@ -55,8 +55,26 @@ function ProductContent() {
         <a href="/products">View All Products</a>
       </div>
 
-      <div className="product-card" style={{ maxWidth: '600px', margin: '50px auto' }}>
-        <h1 style={{ color: '#333', marginBottom: '20px' }}>{product.name}</h1>
+      <div className="product-card" style={{ maxWidth: '600px', margin: '50px auto', position: 'relative' }}>
+        {/* Taarifa ribbon icon */}
+        <div style={{
+          position: 'absolute',
+          top: '15px',
+          right: '15px',
+          zIndex: 10
+        }}>
+          <img 
+            src="/ribbon-icon.svg" 
+            alt="Taarifa Verified" 
+            style={{ 
+              width: '36px', 
+              height: '36px',
+              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+            }}
+            title="Taarifa Verified Product"
+          />
+        </div>
+        <h1 style={{ color: '#333', marginBottom: '20px', paddingRight: '55px' }}>{product.name}</h1>
         
         <div style={{ marginBottom: '20px' }}>
           <h3 style={{ color: '#666', marginBottom: '10px' }}>Product Information</h3>

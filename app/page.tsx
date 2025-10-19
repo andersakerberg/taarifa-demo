@@ -32,9 +32,16 @@ export default function LoginPage() {
   return (
     <div className="container">
       <div className="form-container">
-        <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>
-          Taarifa Login
-        </h1>
+        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+          <img 
+            src="/logo-small.svg" 
+            alt="Taarifa Logo" 
+            style={{ width: '80px', height: '80px', marginBottom: '15px' }}
+          />
+          <h1 style={{ color: '#333', margin: '0' }}>
+            Taarifa Login
+          </h1>
+        </div>
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">

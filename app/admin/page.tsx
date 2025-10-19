@@ -193,7 +193,14 @@ export default function AdminPage() {
         </div>
       </div>
 
-      <h1>Product Management</h1>
+      <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+        <img 
+          src="/logo-small.svg" 
+          alt="Taarifa Logo" 
+          style={{ width: '60px', height: '60px', marginBottom: '10px' }}
+        />
+        <h1 style={{ margin: '0' }}>Product Management</h1>
+      </div>
 
       <div className="form-container">
         <h2>Add New Product</h2>
@@ -276,8 +283,26 @@ export default function AdminPage() {
         <h2>Current Products ({products.length})</h2>
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.id} className="product-card">
-              <h3 style={{ wordBreak: 'break-word', marginBottom: '10px' }}>{product.name}</h3>
+            <div key={product.id} className="product-card" style={{ position: 'relative' }}>
+              {/* Taarifa ribbon icon */}
+              <div style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                zIndex: 10
+              }}>
+                <img 
+                  src="/ribbon-icon.svg" 
+                  alt="Taarifa Verified" 
+                  style={{ 
+                    width: '28px', 
+                    height: '28px',
+                    filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+                  }}
+                  title="Taarifa Verified Product"
+                />
+              </div>
+              <h3 style={{ wordBreak: 'break-word', marginBottom: '10px', paddingRight: '45px' }}>{product.name}</h3>
               <p style={{ wordBreak: 'break-word', marginBottom: '8px' }}><strong>ID:</strong> {product.id}</p>
               <p style={{ wordBreak: 'break-word', marginBottom: '8px' }}><strong>Description:</strong> {product.description}</p>
               <p style={{ wordBreak: 'break-all', marginBottom: '8px' }}><strong>Hash:</strong> <code style={{ 

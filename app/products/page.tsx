@@ -89,9 +89,16 @@ export default function ProductsPage() {
         <a href="/admin">Admin Panel</a>
       </div>
 
-      <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>
-        All Products ({products.length})
-      </h1>
+      <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+        <img 
+          src="/logo-small.svg" 
+          alt="Taarifa Logo" 
+          style={{ width: '60px', height: '60px', marginBottom: '10px' }}
+        />
+        <h1 style={{ color: '#333', margin: '0' }}>
+          All Products ({products.length})
+        </h1>
+      </div>
 
       {products.length === 0 ? (
         <div style={{ textAlign: 'center', marginTop: '50px', color: '#333' }}>
@@ -102,8 +109,26 @@ export default function ProductsPage() {
       ) : (
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.id} className="product-card">
-              <h2 style={{ color: '#333', marginBottom: '15px' }}>{product.name}</h2>
+            <div key={product.id} className="product-card" style={{ position: 'relative' }}>
+              {/* Taarifa ribbon icon */}
+              <div style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                zIndex: 10
+              }}>
+                <img 
+                  src="/ribbon-icon.svg" 
+                  alt="Taarifa Verified" 
+                  style={{ 
+                    width: '32px', 
+                    height: '32px',
+                    filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+                  }}
+                  title="Taarifa Verified Product"
+                />
+              </div>
+              <h2 style={{ color: '#333', marginBottom: '15px', paddingRight: '50px' }}>{product.name}</h2>
               <p><strong>ID:</strong> {product.id}</p>
               <p><strong>Description:</strong> {product.description}</p>
               <p><strong>Hash:</strong> <code style={{ 
