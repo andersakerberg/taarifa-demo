@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { addProduct, getAllProducts, Product } from '@/lib/storage';
+import { addProduct, fetchAllProducts, Product } from '@/lib/api-client';
 import { getAssetPath, getPagePath } from '@/lib/utils';
 import VersionBadge from '@/components/VersionBadge';
 
@@ -30,10 +30,20 @@ export default function AdminPage() {
         router.push('/');
       } else {
         setIsLoggedIn(true);
-        setProducts(getAllProducts());
+        loadProducts();
       }
     }
   }, [router]);
+
+  const loadProducts = async () => {
+    try {
+      const productsData = await fetchAllProducts();
+      setProducts(productsData);
+    } catch (error) {
+      console.error('Error loading products:', error);
+      setError('Failed to load products');
+    }
+  };
 
   useEffect(() => {
     // Close avatar menu when clicking outside
@@ -66,7 +76,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.description) {
@@ -85,12 +95,14 @@ export default function AdminPage() {
     }
 
     try {
-      const newProduct = addProduct(formData);
-      setProducts(getAllProducts());
+      const newProduct = await addProduct(formData.name, formData.description);
       setMessage(`Product added successfully! ID: ${newProduct.id}, Hash: ${newProduct.hash}`);
       setFormData({ name: '', description: '' });
+      // Reload products to get the updated list
+      await loadProducts();
     } catch (error) {
-      setMessage('Error adding product');
+      console.error('Error adding product:', error);
+      setMessage('Error adding product: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
   };
 
