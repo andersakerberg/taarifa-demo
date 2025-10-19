@@ -122,7 +122,7 @@ export default function ProductsPage() {
       ) : (
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.id} className="product-card" style={{ position: 'relative' }}>
+            <div key={product.id} className="product-card" style={{ position: 'relative', paddingBottom: '60px' }}>
               {/* Taarifa ribbon icon */}
               <div className="taarifa-ribbon">
                 <img 
@@ -135,7 +135,12 @@ export default function ProductsPage() {
                   title="Taarifa Verified Product"
                 />
               </div>
-              <h2 style={{ color: '#333', marginBottom: '15px', paddingRight: '50px' }}>{product.name}</h2>
+              <h2 style={{ 
+                color: '#333', 
+                marginBottom: '15px', 
+                paddingRight: '50px',
+                wordBreak: 'break-word'
+              }}>{product.name}</h2>
               <p><strong>ID:</strong> {product.id}</p>
               <p><strong>Description:</strong> {product.description}</p>
               <p><strong>Hash:</strong> <code style={{ 
@@ -146,9 +151,15 @@ export default function ProductsPage() {
                 wordBreak: 'break-all'
               }}>{product.hash}</code></p>
 
-              <div style={{ marginTop: '20px' }}>
-                <div className="qr-sticker">
-                  <h3>QR Code</h3>
+              <div style={{ 
+                marginTop: '20px', 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '20px',
+                alignItems: 'center'
+              }}>
+                <div className="qr-sticker" style={{ textAlign: 'center', width: '100%' }}>
+                  <h3 style={{ marginBottom: '10px' }}>QR Code</h3>
                   <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
                     Scan with your mobile camera
                   </p>
@@ -156,7 +167,7 @@ export default function ProductsPage() {
                     <img 
                       src={qrCodes[product.id]} 
                       alt={`QR Code for ${product.name}`}
-                      style={{ maxWidth: '200px', height: 'auto' }}
+                      style={{ maxWidth: '200px', height: 'auto', margin: '0 auto' }}
                     />
                   ) : (
                     <div style={{ 
@@ -175,29 +186,35 @@ export default function ProductsPage() {
                   )}
                 </div>
 
-                <div className="barcode-sticker">
-                  <h3>Barcode</h3>
+                <div className="barcode-sticker" style={{ textAlign: 'center', width: '100%' }}>
+                  <h3 style={{ marginBottom: '10px' }}>Barcode</h3>
                   <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
                     Product ID: {product.id}
                   </p>
                   <canvas 
                     id={`barcode-${product.id}`}
-                    style={{ maxWidth: '100%', height: 'auto' }}
+                    style={{ maxWidth: '100%', height: 'auto', margin: '0 auto' }}
                   />
                 </div>
               </div>
 
-              <div style={{ marginTop: '20px', textAlign: 'center' }}>
-                <a 
-                  href={`${getPagePath('/product')}?hash=${product.hash}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary"
-                  style={{ width: '100%', display: 'block' }}
-                >
-                  View Product Details
-                </a>
-              </div>
+              <a 
+                href={`${getPagePath('/product')}?hash=${product.hash}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+                style={{ 
+                  width: 'calc(100% - 30px)', 
+                  display: 'block', 
+                  textAlign: 'center',
+                  position: 'absolute',
+                  bottom: '15px',
+                  left: '15px',
+                  marginTop: 'auto'
+                }}
+              >
+                View Product Details
+              </a>
             </div>
           ))}
         </div>
