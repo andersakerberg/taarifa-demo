@@ -397,13 +397,12 @@ export default function AdminPage() {
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
                 style={{ 
-                  width: '100%', 
+                  width: 'calc(100% - 30px)', 
                   display: 'block', 
                   textAlign: 'center',
                   position: 'absolute',
                   bottom: '15px',
                   left: '15px',
-                  right: '15px',
                   marginTop: 'auto'
                 }}
               >
