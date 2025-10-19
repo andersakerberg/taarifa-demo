@@ -25,14 +25,26 @@ export function getAssetPath(path: string): string {
 export function getPagePath(path: string): string {
   // Check if we're in production (GitHub Pages)
   if (typeof window !== 'undefined') {
+    // Debug logging for GitHub Pages detection
+    console.log('getPagePath debug:', {
+      inputPath: path,
+      hostname: window.location.hostname,
+      pathname: window.location.pathname,
+      isGitHubPages: window.location.hostname.includes('github.io'),
+      hasBasePath: window.location.pathname.startsWith('/taarifa-demo')
+    });
+    
     // Check for GitHub Pages deployment
     if (window.location.hostname.includes('github.io') || 
         window.location.pathname.startsWith('/taarifa-demo')) {
-      return `/taarifa-demo${path}`;
+      const fullPath = `/taarifa-demo${path}`;
+      console.log('Using GitHub Pages path:', fullPath);
+      return fullPath;
     }
   }
   
   // For development or other environments
+  console.log('Using development path:', path);
   return path;
 }
 
@@ -43,11 +55,23 @@ export function getPagePath(path: string): string {
  */
 export function getBaseUrl(): string {
   if (typeof window !== 'undefined') {
+    // Debug logging for GitHub Pages detection
+    console.log('getBaseUrl debug:', {
+      hostname: window.location.hostname,
+      pathname: window.location.pathname,
+      origin: window.location.origin,
+      isGitHubPages: window.location.hostname.includes('github.io'),
+      hasBasePath: window.location.pathname.startsWith('/taarifa-demo')
+    });
+    
     // Check for GitHub Pages deployment
     if (window.location.hostname.includes('github.io') || 
         window.location.pathname.startsWith('/taarifa-demo')) {
-      return `${window.location.origin}/taarifa-demo`;
+      const baseUrl = `${window.location.origin}/taarifa-demo`;
+      console.log('Using GitHub Pages base URL:', baseUrl);
+      return baseUrl;
     }
+    console.log('Using development base URL:', window.location.origin);
     return window.location.origin;
   }
   
