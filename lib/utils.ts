@@ -35,3 +35,22 @@ export function getPagePath(path: string): string {
   // For development or other environments
   return path;
 }
+
+/**
+ * Get the correct base URL for both development and production
+ * In production (GitHub Pages), includes the base path
+ * In development, uses the origin directly
+ */
+export function getBaseUrl(): string {
+  if (typeof window !== 'undefined') {
+    // Check for GitHub Pages deployment
+    if (window.location.hostname.includes('github.io') || 
+        window.location.pathname.startsWith('/taarifa-demo')) {
+      return `${window.location.origin}/taarifa-demo`;
+    }
+    return window.location.origin;
+  }
+  
+  // Fallback for server-side rendering
+  return '';
+}

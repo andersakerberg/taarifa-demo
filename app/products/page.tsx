@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getAllProducts, Product } from '@/lib/storage';
-import { getAssetPath, getPagePath } from '@/lib/utils';
+import { getAssetPath, getPagePath, getBaseUrl } from '@/lib/utils';
 import VersionBadge from '@/components/VersionBadge';
 import QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
@@ -25,7 +25,7 @@ export default function ProductsPage() {
       
       for (const product of products) {
         try {
-          const productUrl = `${window.location.origin}${getPagePath('/product')}?hash=${product.hash}`;
+          const productUrl = `${getBaseUrl()}${getPagePath('/product')}?hash=${product.hash}`;
           const qrCodeDataURL = await QRCode.toDataURL(productUrl, {
             width: 200,
             margin: 2,
@@ -43,10 +43,10 @@ export default function ProductsPage() {
       setQrCodes(qrCodesData);
     };
 
-    if (products.length > 0) {
+    if (isClient && products.length > 0) {
       generateQRCodes();
     }
-  }, [products]);
+  }, [products, isClient]);
 
   useEffect(() => {
     // Generate barcodes after QR codes are generated
@@ -68,7 +68,7 @@ export default function ProductsPage() {
         }
       }
     });
-  }, [products, qrCodes]);
+  }, [products, qrCodes, isClient]);
 
   if (!isClient) {
     return (
