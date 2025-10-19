@@ -26,6 +26,14 @@ export function getAssetPath(path: string): string {
       console.log('Using GitHub Pages asset path:', fullPath);
       return fullPath;
     }
+    
+    // Additional check: if we're on a GitHub Pages URL but the detection above failed
+    if (window.location.hostname.includes('github.io')) {
+      const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+      const fullPath = `/taarifa-demo${normalizedPath}`;
+      console.log('Fallback GitHub Pages asset path:', fullPath);
+      return fullPath;
+    }
   }
   
   // For development or other environments
