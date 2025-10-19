@@ -3,6 +3,8 @@
  * This provides better persistence than localStorage and is more accessible
  */
 
+import { getAssetPath } from './utils';
+
 export interface Product {
   id: string;
   name: string;
@@ -11,15 +13,14 @@ export interface Product {
   createdAt: string; // ISO date string
 }
 
-const JSON_FILE_PATH = '/products.json';
-
 /**
  * Get all products from the JSON file and localStorage backup
  */
 export async function getAllProducts(): Promise<Product[]> {
   try {
-    // First try to get from JSON file
-    const response = await fetch(JSON_FILE_PATH);
+    // First try to get from JSON file using the correct asset path
+    const jsonFilePath = getAssetPath('/products.json');
+    const response = await fetch(jsonFilePath);
     if (!response.ok) {
       throw new Error(`Failed to fetch products: ${response.status}`);
     }
