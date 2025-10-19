@@ -49,17 +49,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "22"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
 
       - name: Restore cache
         uses: actions/cache@v3
@@ -76,7 +70,21 @@ jobs:
         run: npm ci
 
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.command }} build
+        run: |
+          # Set environment variables for production build
+          export NODE_ENV=production
+          export NEXT_TELEMETRY_DISABLED=1
+          # Try building with the build script
+          ./build.sh
+
+      - name: Verify build output
+        run: |
+          echo "Build output contents:"
+          ls -la out/ || echo "out directory not found"
+          echo "Checking for static files:"
+          find out -name "*.html" | head -5 || echo "No HTML files found"
+          find out -name "*.js" | head -5 || echo "No JS files found"
+          find out -name "*.css" | head -5 || echo "No CSS files found"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

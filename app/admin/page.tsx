@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { addProduct, getAllProducts, Product } from '@/lib/storage';
+import { addProduct, getAllProducts, Product } from '../lib/storage';
 
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
