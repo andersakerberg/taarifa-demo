@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { fetchProductByHash } from '@/lib/api-client';
+import { getProductByHash } from '@/lib/storage';
 import { getAssetPath, getPagePath } from '@/lib/utils';
 import VersionBadge from '@/components/VersionBadge';
 
@@ -12,20 +12,12 @@ function ProductContent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadProduct = async () => {
-      const hash = searchParams.get('hash');
-      if (hash) {
-        try {
-          const foundProduct = await fetchProductByHash(hash);
-          setProduct(foundProduct);
-        } catch (error) {
-          console.error('Error loading product:', error);
-        }
-      }
-      setLoading(false);
-    };
-    
-    loadProduct();
+    const hash = searchParams.get('hash');
+    if (hash) {
+      const foundProduct = getProductByHash(hash);
+      setProduct(foundProduct);
+    }
+    setLoading(false);
   }, [searchParams]);
 
   if (loading) {

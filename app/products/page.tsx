@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { fetchAllProducts, Product } from '@/lib/api-client';
+import { getAllProducts, Product } from '@/lib/storage';
 import { getAssetPath, getPagePath, getBaseUrl } from '@/lib/utils';
 import VersionBadge from '@/components/VersionBadge';
 import QRCode from 'qrcode';
@@ -15,17 +15,8 @@ export default function ProductsPage() {
   useEffect(() => {
     // Set client-side flag and load products
     setIsClient(true);
-    loadProducts();
+    setProducts(getAllProducts());
   }, []);
-
-  const loadProducts = async () => {
-    try {
-      const productsData = await fetchAllProducts();
-      setProducts(productsData);
-    } catch (error) {
-      console.error('Error loading products:', error);
-    }
-  };
 
   useEffect(() => {
     // Generate QR codes for all products
