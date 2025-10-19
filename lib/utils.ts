@@ -6,38 +6,17 @@
 export function getAssetPath(path: string): string {
   // Check if we're in production (GitHub Pages)
   if (typeof window !== 'undefined') {
-    // Debug logging for GitHub Pages detection
-    console.log('getAssetPath debug:', {
-      inputPath: path,
-      hostname: window.location.hostname,
-      pathname: window.location.pathname,
-      isGitHubPages: window.location.hostname.includes('github.io'),
-      hasBasePath: window.location.pathname.startsWith('/taarifa-demo'),
-      currentUrl: window.location.href
-    });
-    
     // Check for GitHub Pages deployment
-    if (window.location.hostname.includes('github.io') || 
-        window.location.pathname.startsWith('/taarifa-demo')) {
+    if (window.location.hostname.includes('github.io')) {
       // For GitHub Pages, we need to manually add the base path
       // since Next.js static export doesn't automatically handle this for public assets
       const normalizedPath = path.startsWith('/') ? path : `/${path}`;
       const fullPath = `/taarifa-demo${normalizedPath}`;
-      console.log('Using GitHub Pages asset path:', fullPath);
-      return fullPath;
-    }
-    
-    // Additional check: if we're on a GitHub Pages URL but the detection above failed
-    if (window.location.hostname.includes('github.io')) {
-      const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-      const fullPath = `/taarifa-demo${normalizedPath}`;
-      console.log('Fallback GitHub Pages asset path:', fullPath);
       return fullPath;
     }
   }
   
   // For development or other environments
-  console.log('Using development asset path:', path);
   return path;
 }
 
@@ -49,26 +28,14 @@ export function getAssetPath(path: string): string {
 export function getPagePath(path: string): string {
   // Check if we're in production (GitHub Pages)
   if (typeof window !== 'undefined') {
-    // Debug logging for GitHub Pages detection
-    console.log('getPagePath debug:', {
-      inputPath: path,
-      hostname: window.location.hostname,
-      pathname: window.location.pathname,
-      isGitHubPages: window.location.hostname.includes('github.io'),
-      hasBasePath: window.location.pathname.startsWith('/taarifa-demo')
-    });
-    
     // Check for GitHub Pages deployment
-    if (window.location.hostname.includes('github.io') || 
-        window.location.pathname.startsWith('/taarifa-demo')) {
+    if (window.location.hostname.includes('github.io')) {
       const fullPath = `/taarifa-demo${path}`;
-      console.log('Using GitHub Pages path:', fullPath);
       return fullPath;
     }
   }
   
   // For development or other environments
-  console.log('Using development path:', path);
   return path;
 }
 
@@ -79,23 +46,11 @@ export function getPagePath(path: string): string {
  */
 export function getBaseUrl(): string {
   if (typeof window !== 'undefined') {
-    // Debug logging for GitHub Pages detection
-    console.log('getBaseUrl debug:', {
-      hostname: window.location.hostname,
-      pathname: window.location.pathname,
-      origin: window.location.origin,
-      isGitHubPages: window.location.hostname.includes('github.io'),
-      hasBasePath: window.location.pathname.startsWith('/taarifa-demo')
-    });
-    
     // Check for GitHub Pages deployment
-    if (window.location.hostname.includes('github.io') || 
-        window.location.pathname.startsWith('/taarifa-demo')) {
+    if (window.location.hostname.includes('github.io')) {
       const baseUrl = `${window.location.origin}/taarifa-demo`;
-      console.log('Using GitHub Pages base URL:', baseUrl);
       return baseUrl;
     }
-    console.log('Using development base URL:', window.location.origin);
     return window.location.origin;
   }
   

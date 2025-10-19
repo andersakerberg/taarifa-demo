@@ -173,6 +173,8 @@ body {
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 5px;
+  position: relative;
+  z-index: 10;
 }
 
 .navigation a {
@@ -180,6 +182,10 @@ body {
   text-decoration: none;
   margin-right: 20px;
   font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
 }
 
 .navigation a:hover {
