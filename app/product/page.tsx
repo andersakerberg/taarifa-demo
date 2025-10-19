@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getProductByHash } from '@/lib/storage';
 
-export default function ProductPage() {
+function ProductContent() {
   const searchParams = useSearchParams();
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -78,5 +78,19 @@ export default function ProductPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProductPage() {
+  return (
+    <Suspense fallback={
+      <div className="container">
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+          <h2>Loading...</h2>
+        </div>
+      </div>
+    }>
+      <ProductContent />
+    </Suspense>
   );
 }
