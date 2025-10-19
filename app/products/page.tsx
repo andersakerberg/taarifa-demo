@@ -122,7 +122,7 @@ export default function ProductsPage() {
       ) : (
         <div className="product-list">
           {products.map((product) => (
-            <div key={product.id} className="product-card" style={{ position: 'relative', paddingBottom: '80px', minHeight: '500px' }}>
+            <div key={product.id} className="product-card">
               {/* Taarifa ribbon icon */}
               <div className="taarifa-ribbon">
                 <img 
@@ -135,36 +135,29 @@ export default function ProductsPage() {
                   title="Taarifa Verified Product"
                 />
               </div>
-              <h2 style={{ 
-                color: '#333', 
-                marginBottom: '15px', 
-                paddingRight: '50px',
-                wordBreak: 'break-word'
-              }}>{product.name}</h2>
-              <p><strong>ID:</strong> {product.id}</p>
-              <p><strong>Description:</strong> {product.description}</p>
-              <p><strong>Hash:</strong> <code style={{ 
-                backgroundColor: '#f8f9fa', 
-                padding: '2px 6px', 
-                borderRadius: '3px',
-                fontSize: '12px',
-                wordBreak: 'break-all'
-              }}>{product.hash}</code></p>
+              
+              {/* Product Info Section */}
+              <div className="product-info">
+                <h2 style={{ 
+                  color: '#333', 
+                  marginBottom: '15px', 
+                  paddingRight: '50px',
+                  wordBreak: 'break-word'
+                }}>{product.name}</h2>
+                <p><strong>ID:</strong> {product.id}</p>
+                <p><strong>Description:</strong> {product.description}</p>
+                <p><strong>Hash:</strong> <code style={{ 
+                  backgroundColor: '#f8f9fa', 
+                  padding: '2px 6px', 
+                  borderRadius: '3px',
+                  fontSize: '12px',
+                  wordBreak: 'break-all'
+                }}>{product.hash}</code></p>
+              </div>
 
-              {/* Spacer to push QR section to consistent position */}
-              <div style={{ height: '20px' }}></div>
-
-              <div style={{ 
-                position: 'absolute',
-                top: '200px', // Fixed position from top
-                left: '15px',
-                right: '15px',
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '20px',
-                alignItems: 'center'
-              }}>
-                <div className="qr-sticker" style={{ textAlign: 'center', width: '100%' }}>
+              {/* QR Code and Barcode Section */}
+              <div className="codes-section">
+                <div className="qr-sticker">
                   <h3 style={{ marginBottom: '10px' }}>QR Code</h3>
                   <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
                     Scan with your mobile camera
@@ -192,7 +185,7 @@ export default function ProductsPage() {
                   )}
                 </div>
 
-                <div className="barcode-sticker" style={{ textAlign: 'center', width: '100%' }}>
+                <div className="barcode-sticker">
                   <h3 style={{ marginBottom: '10px' }}>Barcode</h3>
                   <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
                     Product ID: {product.id}
@@ -204,20 +197,12 @@ export default function ProductsPage() {
                 </div>
               </div>
 
+              {/* Action Button */}
               <a 
                 href={`${getPagePath('/product')}?hash=${product.hash}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="btn btn-secondary"
-                style={{ 
-                  width: 'calc(100% - 30px)', 
-                  display: 'block', 
-                  textAlign: 'center',
-                  position: 'absolute',
-                  bottom: '15px',
-                  left: '15px',
-                  marginTop: 'auto'
-                }}
+                className="btn btn-secondary product-action-btn"
               >
                 View Product Details
               </a>
