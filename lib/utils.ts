@@ -6,14 +6,30 @@
 export function getAssetPath(path: string): string {
   // Check if we're in production (GitHub Pages)
   if (typeof window !== 'undefined') {
+    // Debug logging for GitHub Pages detection
+    console.log('getAssetPath debug:', {
+      inputPath: path,
+      hostname: window.location.hostname,
+      pathname: window.location.pathname,
+      isGitHubPages: window.location.hostname.includes('github.io'),
+      hasBasePath: window.location.pathname.startsWith('/taarifa-demo'),
+      currentUrl: window.location.href
+    });
+    
     // Check for GitHub Pages deployment
     if (window.location.hostname.includes('github.io') || 
         window.location.pathname.startsWith('/taarifa-demo')) {
-      return `/taarifa-demo${path}`;
+      // For GitHub Pages, we need to manually add the base path
+      // since Next.js static export doesn't automatically handle this for public assets
+      const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+      const fullPath = `/taarifa-demo${normalizedPath}`;
+      console.log('Using GitHub Pages asset path:', fullPath);
+      return fullPath;
     }
   }
   
   // For development or other environments
+  console.log('Using development asset path:', path);
   return path;
 }
 
