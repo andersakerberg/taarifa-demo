@@ -1,0 +1,84 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleAutoFill = () => {
+    setUsername('info@taarifa.com');
+    setPassword('Test123');
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    if (username === 'info@taarifa.com' && password === 'Test123') {
+      // Store login state in localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('isLoggedIn', 'true');
+      }
+      router.push('/admin');
+    } else {
+      setError('Invalid username or password');
+    }
+  };
+
+  return (
+    <div className="container">
+      <div className="form-container">
+        <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>
+          Taarifa Login
+        </h1>
+        
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username:</label>
+            <input
+              type="email"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="button" onClick={handleAutoFill} className="btn btn-secondary">
+            Auto Fill Credentials
+          </button>
+
+          <button type="submit" className="btn">
+            Login
+          </button>
+
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
+        </form>
+
+        <div style={{ marginTop: '30px', textAlign: 'center' }}>
+          <p>Public Pages:</p>
+          <a href="/products" className="btn btn-secondary">View All Products</a>
+        </div>
+      </div>
+    </div>
+  );
+}
