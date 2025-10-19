@@ -152,7 +152,7 @@ export default function AdminPage() {
               <p><strong>Description:</strong> {product.description}</p>
               <p><strong>Hash:</strong> <code>{product.hash}</code></p>
               <a 
-                href={`/product/${product.hash}`} 
+                href={`/product?hash=${product.hash}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-secondary"

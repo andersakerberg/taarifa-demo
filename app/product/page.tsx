@@ -1,21 +1,24 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { getProductByHash } from '@/lib/storage';
 
 export default function ProductPage() {
-  const params = useParams();
+  const searchParams = useSearchParams();
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (params.hash) {
-      const foundProduct = getProductByHash(params.hash as string);
+    const hash = searchParams.get('hash');
+    if (hash) {
+      const foundProduct = getProductByHash(hash);
       setProduct(foundProduct);
       setLoading(false);
+    } else {
+      setLoading(false);
     }
-  }, [params.hash]);
+  }, [searchParams]);
 
   if (loading) {
     return (

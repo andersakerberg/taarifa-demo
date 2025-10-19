@@ -13,7 +13,7 @@ A React Next.js application for managing products with QR codes and barcodes. Th
 
 ### Page 2 - Product Display
 - **Public Access**: No authentication required
-- **Hash-based URLs**: Access products via `/product/[hash]` URLs
+- **Hash-based URLs**: Access products via `/product?hash=[hash]` URLs
 - **Error Handling**: Shows big red X and "Invalid Code" message for non-existent hashes
 - **Product Details**: Displays all product information in a clean format
 
@@ -74,7 +74,7 @@ For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 3. **View Products**: 
    - Admin panel shows all products
    - Public page at `/products` shows QR codes and barcodes
-   - Individual product pages at `/product/[hash]`
+   - Individual product pages at `/product?hash=[hash]`
 
 4. **QR Code Scanning**: Use your mobile camera to scan QR codes, which will open the product detail page
 
@@ -83,7 +83,7 @@ For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 ```
 ├── app/
 │   ├── admin/           # Admin panel with product form
-│   ├── product/[hash]/  # Individual product display pages
+│   ├── product/         # Individual product display page (uses query params)
 │   ├── products/        # Public product list with QR/barcodes
 │   ├── globals.css      # Global styles
 │   ├── layout.tsx       # Root layout

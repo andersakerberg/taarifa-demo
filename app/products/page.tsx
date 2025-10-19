@@ -16,7 +16,7 @@ export default function ProductsPage() {
       
       for (const product of products) {
         try {
-          const productUrl = `${window.location.origin}/product/${product.hash}`;
+          const productUrl = `${window.location.origin}/product?hash=${product.hash}`;
           const qrCodeDataURL = await QRCode.toDataURL(productUrl, {
             width: 200,
             margin: 2,
@@ -135,7 +135,7 @@ export default function ProductsPage() {
 
               <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <a 
-                  href={`/product/${product.hash}`} 
+                  href={`/product?hash=${product.hash}`} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="btn btn-secondary"
