@@ -25,7 +25,7 @@ export default function ProductsPage() {
       
       for (const product of products) {
         try {
-          const productUrl = `${getBaseUrl()}${getPagePath('/product')}?hash=${product.hash}`;
+          const productUrl = `${getBaseUrl()}/product?hash=${product.hash}`;
           const qrCodeDataURL = await QRCode.toDataURL(productUrl, {
             width: 200,
             margin: 2,
