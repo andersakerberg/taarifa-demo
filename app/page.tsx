@@ -40,6 +40,19 @@ export default function LoginPage() {
             src={getAssetPath('/logo-small.svg')}
             alt="Taarifa Logo" 
             style={{ width: '80px', height: '80px', marginBottom: '15px' }}
+            onLoad={() => {
+              console.log('✅ Logo loaded successfully');
+              console.log('Logo URL:', getAssetPath('/logo-small.svg'));
+              console.log('Image src attribute:', (document.querySelector('img[alt="Taarifa Logo"]') as HTMLImageElement)?.src);
+            }}
+            onError={(e) => {
+              console.error('❌ Logo failed to load');
+              console.error('Generated path:', getAssetPath('/logo-small.svg'));
+              console.error('Current URL:', window.location.href);
+              console.error('Hostname:', window.location.hostname);
+              console.error('Expected full URL:', window.location.origin + getAssetPath('/logo-small.svg'));
+              console.error('Image src attribute:', e.currentTarget.src);
+            }}
           />
           <h1 style={{ color: '#333', margin: '0' }}>
             Taarifa Login
