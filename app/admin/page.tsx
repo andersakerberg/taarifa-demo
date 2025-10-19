@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { addProduct, getAllProducts, Product } from '@/lib/json-storage';
+import { addProduct, getAllProducts, deleteProduct, Product } from '@/lib/json-storage';
 import { getAssetPath, getPagePath } from '@/lib/utils';
 import VersionBadge from '@/components/VersionBadge';
 
@@ -104,6 +104,23 @@ export default function AdminPage() {
     } catch (error) {
       console.error('Error adding product:', error);
       setMessage('Error adding product: ' + (error instanceof Error ? error.message : 'Unknown error'));
+    }
+  };
+
+  const handleDeleteProduct = async (productId: string, productName: string) => {
+    if (window.confirm(`Are you sure you want to delete "${productName}"?`)) {
+      try {
+        const success = await deleteProduct(productId);
+        if (success) {
+          setMessage(`Product "${productName}" deleted successfully`);
+          await loadProducts(); // Reload the product list
+        } else {
+          setMessage('Failed to delete product');
+        }
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        setMessage('Error deleting product: ' + (error instanceof Error ? error.message : 'Unknown error'));
+      }
     }
   };
 
@@ -318,7 +335,41 @@ export default function AdminPage() {
         <div className="product-list">
           {products.map((product) => (
             <div key={product.id} className="product-card" style={{ position: 'relative' }}>
-              {/* Taarifa ribbon icon */}
+              {/* Delete button - top left */}
+              <button
+                onClick={() => handleDeleteProduct(product.id, product.name)}
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  left: '10px',
+                  background: '#dc3545',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '28px',
+                  height: '28px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 10,
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                }}
+                title="Delete Product"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#c82333';
+                  e.currentTarget.style.transform = 'scale(1.1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#dc3545';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                ×
+              </button>
+
+              {/* Taarifa ribbon icon - top right */}
               <div className="taarifa-ribbon">
                 <img 
                   src={getAssetPath('/ribbon-icon.svg')}
@@ -330,7 +381,7 @@ export default function AdminPage() {
                   title="Taarifa Verified Product"
                 />
               </div>
-              <h3 style={{ wordBreak: 'break-word', marginBottom: '10px', paddingRight: '45px' }}>{product.name}</h3>
+              <h3 style={{ wordBreak: 'break-word', marginBottom: '10px', paddingLeft: '45px', paddingRight: '45px' }}>{product.name}</h3>
               <p style={{ wordBreak: 'break-word', marginBottom: '8px' }}><strong>ID:</strong> {product.id}</p>
               <p style={{ wordBreak: 'break-word', marginBottom: '8px' }}><strong>Description:</strong> {product.description}</p>
               <p style={{ wordBreak: 'break-all', marginBottom: '8px' }}><strong>Hash:</strong> <code style={{ 

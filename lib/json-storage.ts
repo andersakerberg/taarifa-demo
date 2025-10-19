@@ -14,19 +14,34 @@ export interface Product {
 const JSON_FILE_PATH = '/products.json';
 
 /**
- * Get all products from the JSON file
+ * Get all products from the JSON file and localStorage backup
  */
 export async function getAllProducts(): Promise<Product[]> {
   try {
+    // First try to get from JSON file
     const response = await fetch(JSON_FILE_PATH);
     if (!response.ok) {
       throw new Error(`Failed to fetch products: ${response.status}`);
     }
-    const products = await response.json();
-    return Array.isArray(products) ? products : [];
+    const jsonProducts = await response.json();
+    const products = Array.isArray(jsonProducts) ? jsonProducts : [];
+    
+    // Also get from localStorage backup and merge
+    const backupProducts = getProductsFromBackup();
+    
+    // Merge products, giving priority to localStorage (more recent)
+    const allProducts = [...products];
+    backupProducts.forEach(backupProduct => {
+      if (!allProducts.find(p => p.id === backupProduct.id)) {
+        allProducts.push(backupProduct);
+      }
+    });
+    
+    return allProducts;
   } catch (error) {
     console.error('Error loading products from JSON file:', error);
-    return [];
+    // Fallback to localStorage only
+    return getProductsFromBackup();
   }
 }
 
@@ -64,9 +79,12 @@ export async function addProduct(name: string, description: string): Promise<Pro
   
   const products = await getAllProducts();
   products.push(product);
+  
+  // Save to localStorage backup (since we can't write to JSON file from client)
   await saveProducts(products);
   
   console.log(`Product added: ${product.name} (${product.id})`);
+  console.log('Note: Product saved to localStorage backup. Use management script to update JSON file.');
   return product;
 }
 
@@ -114,6 +132,7 @@ export async function deleteProduct(id: string): Promise<boolean> {
     products.splice(index, 1);
     await saveProducts(products);
     console.log(`Product deleted: ${id}`);
+    console.log('Note: Product removed from localStorage backup. Use management script to update JSON file.');
     return true;
   }
   
