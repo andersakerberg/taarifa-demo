@@ -1,0 +1,16 @@
+[
+  {
+    "id": "lzj61ch8z",
+    "name": "Sample Product 1",
+    "description": "This is a sample product for testing the system",
+    "hash": "12811bb1",
+    "createdAt": "2025-10-19T18:18:39.154Z"
+  },
+  {
+    "id": "if4ctr5m6",
+    "name": "Sample Product 2",
+    "description": "Another sample product to demonstrate the functionality",
+    "hash": "ca0ff2",
+    "createdAt": "2025-10-19T18:18:41.610Z"
+  }
+]
