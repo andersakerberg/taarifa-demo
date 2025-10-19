@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getAllProducts, Product } from '@/lib/storage';
+import { getAssetPath } from '@/lib/utils';
 import QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
 
@@ -91,7 +92,7 @@ export default function ProductsPage() {
 
       <div style={{ textAlign: 'center', marginBottom: '30px' }}>
         <img 
-          src="/logo-small.svg" 
+          src={getAssetPath('/logo-small.svg')}
           alt="Taarifa Logo" 
           style={{ width: '60px', height: '60px', marginBottom: '10px' }}
         />
@@ -113,7 +114,7 @@ export default function ProductsPage() {
               {/* Taarifa ribbon icon */}
               <div className="taarifa-ribbon">
                 <img 
-                  src="/ribbon-icon.svg" 
+                  src={getAssetPath('/ribbon-icon.svg')}
                   alt="Taarifa Verified" 
                   style={{ 
                     width: '32px', 

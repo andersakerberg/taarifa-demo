@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getAssetPath } from '@/lib/utils';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -34,7 +35,7 @@ export default function LoginPage() {
       <div className="form-container">
         <div style={{ textAlign: 'center', marginBottom: '30px' }}>
           <img 
-            src="/logo-small.svg" 
+            src={getAssetPath('/logo-small.svg')}
             alt="Taarifa Logo" 
             style={{ width: '80px', height: '80px', marginBottom: '15px' }}
           />

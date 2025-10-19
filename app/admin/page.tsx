@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { addProduct, getAllProducts, Product } from '@/lib/storage';
+import { getAssetPath } from '@/lib/utils';
 
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -195,7 +196,7 @@ export default function AdminPage() {
 
       <div style={{ textAlign: 'center', marginBottom: '30px' }}>
         <img 
-          src="/logo-small.svg" 
+          src={getAssetPath('/logo-small.svg')}
           alt="Taarifa Logo" 
           style={{ width: '60px', height: '60px', marginBottom: '10px' }}
         />
@@ -287,7 +288,7 @@ export default function AdminPage() {
               {/* Taarifa ribbon icon */}
               <div className="taarifa-ribbon">
                 <img 
-                  src="/ribbon-icon.svg" 
+                  src={getAssetPath('/ribbon-icon.svg')}
                   alt="Taarifa Verified" 
                   style={{ 
                     width: '28px', 

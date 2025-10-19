@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getProductByHash } from '@/lib/storage';
+import { getAssetPath } from '@/lib/utils';
 
 function ProductContent() {
   const searchParams = useSearchParams();
@@ -59,7 +60,7 @@ function ProductContent() {
         {/* Taarifa ribbon icon */}
         <div className="taarifa-ribbon" style={{ top: '15px', right: '15px' }}>
           <img 
-            src="/ribbon-icon.svg" 
+            src={getAssetPath('/ribbon-icon.svg')}
             alt="Taarifa Verified" 
             style={{ 
               width: '36px', 
