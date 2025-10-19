@@ -285,19 +285,13 @@ export default function AdminPage() {
           {products.map((product) => (
             <div key={product.id} className="product-card" style={{ position: 'relative' }}>
               {/* Taarifa ribbon icon */}
-              <div style={{
-                position: 'absolute',
-                top: '10px',
-                right: '10px',
-                zIndex: 10
-              }}>
+              <div className="taarifa-ribbon">
                 <img 
                   src="/ribbon-icon.svg" 
                   alt="Taarifa Verified" 
                   style={{ 
                     width: '28px', 
-                    height: '28px',
-                    filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+                    height: '28px'
                   }}
                   title="Taarifa Verified Product"
                 />

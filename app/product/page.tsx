@@ -57,19 +57,13 @@ function ProductContent() {
 
       <div className="product-card" style={{ maxWidth: '600px', margin: '50px auto', position: 'relative' }}>
         {/* Taarifa ribbon icon */}
-        <div style={{
-          position: 'absolute',
-          top: '15px',
-          right: '15px',
-          zIndex: 10
-        }}>
+        <div className="taarifa-ribbon" style={{ top: '15px', right: '15px' }}>
           <img 
             src="/ribbon-icon.svg" 
             alt="Taarifa Verified" 
             style={{ 
               width: '36px', 
-              height: '36px',
-              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+              height: '36px'
             }}
             title="Taarifa Verified Product"
           />
