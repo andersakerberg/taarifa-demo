@@ -39,9 +39,9 @@ function ProductContent() {
           <p style={{ fontSize: '18px', color: '#666', marginTop: '20px' }}>
             The product code you entered is invalid or does not exist.
           </p>
-          <div style={{ marginTop: '30px' }}>
-            <a href="/" className="btn">Go Home</a>
-            <a href="/products" className="btn btn-secondary">View All Products</a>
+          <div style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <a href="/" className="btn" style={{ width: '100%', display: 'block', textAlign: 'center' }}>Go Home</a>
+            <a href="/products" className="btn btn-secondary" style={{ width: '100%', display: 'block', textAlign: 'center' }}>View All Products</a>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ function ProductContent() {
         </div>
 
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
-          <a href="/products" className="btn btn-secondary">
+          <a href="/products" className="btn btn-secondary" style={{ width: '100%', display: 'block' }}>
             View All Products
           </a>
         </div>

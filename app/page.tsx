@@ -59,13 +59,24 @@ export default function LoginPage() {
             />
           </div>
 
-          <button type="button" onClick={handleAutoFill} className="btn btn-secondary">
-            Auto Fill Credentials
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <button 
+              type="button" 
+              onClick={handleAutoFill} 
+              className="btn btn-secondary"
+              style={{ width: '100%' }}
+            >
+              Auto Fill Credentials
+            </button>
 
-          <button type="submit" className="btn">
-            Login
-          </button>
+            <button 
+              type="submit" 
+              className="btn"
+              style={{ width: '100%' }}
+            >
+              Login
+            </button>
+          </div>
 
           {error && (
             <div className="error-message">
@@ -75,8 +86,7 @@ export default function LoginPage() {
         </form>
 
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
-          <p>Public Pages:</p>
-          <a href="/products" className="btn btn-secondary">View All Products</a>
+          <a href="/products" className="btn btn-secondary" style={{ width: '100%', display: 'block' }}>View All Products</a>
         </div>
       </div>
     </div>

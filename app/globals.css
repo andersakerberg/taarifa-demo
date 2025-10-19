@@ -14,27 +14,8 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  color: #333;
+  background: #f8f9fa;
 }
 
 .container {
@@ -90,6 +71,10 @@ body {
   transition: background-color 0.3s;
   margin-right: 10px;
   margin-bottom: 10px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  text-decoration: none;
 }
 
 .btn:hover {
@@ -195,4 +180,42 @@ body {
 
 .navigation a:hover {
   text-decoration: underline;
+}
+
+/* Ensure all text is visible */
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+}
+
+p, span, div {
+  color: inherit;
+}
+
+/* Ensure form elements have proper contrast */
+input, textarea, select {
+  color: #333;
+  background-color: white;
+}
+
+/* Ensure code elements are visible */
+code {
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+/* Ensure all text in cards is visible */
+.product-card h1,
+.product-card h2,
+.product-card h3,
+.product-card p {
+  color: #333;
+}
+
+/* Ensure navigation text is visible */
+.navigation {
+  color: #333;
+}
+
+.navigation a {
+  color: #007bff;
 }

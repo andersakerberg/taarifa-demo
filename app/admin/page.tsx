@@ -1,21 +1,26 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { addProduct, getAllProducts } from '@/lib/storage';
+import { addProduct, getAllProducts, Product } from '@/lib/storage';
 
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [products, setProducts] = useState(getAllProducts());
+  const [products, setProducts] = useState<Product[]>([]);
   const [formData, setFormData] = useState({
-    id: '',
     name: '',
     description: ''
   });
   const [message, setMessage] = useState('');
+  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const avatarRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
+    // Set client-side flag and load data
+    setIsClient(true);
+    
     // Check if user is logged in
     if (typeof window !== 'undefined') {
       const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -23,9 +28,24 @@ export default function AdminPage() {
         router.push('/');
       } else {
         setIsLoggedIn(true);
+        setProducts(getAllProducts());
       }
     }
   }, [router]);
+
+  useEffect(() => {
+    // Close avatar menu when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      if (avatarRef.current && !avatarRef.current.contains(event.target as Node)) {
+        setShowAvatarMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -35,26 +55,38 @@ export default function AdminPage() {
     }));
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (formData.name.length >= 5 && formData.description.length >= 5) {
+        handleSubmit(e as any);
+      }
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.id || !formData.name || !formData.description) {
+    if (!formData.name || !formData.description) {
       setMessage('Please fill in all fields');
       return;
     }
 
-    // Check if product ID already exists
-    const existingProduct = products.find(p => p.id === formData.id);
-    if (existingProduct) {
-      setMessage('Product with this ID already exists');
+    if (formData.name.length < 5) {
+      setMessage('Product name must be at least 5 characters long');
+      return;
+    }
+
+    if (formData.description.length < 5) {
+      setMessage('Product description must be at least 5 characters long');
       return;
     }
 
     try {
       const newProduct = addProduct(formData);
       setProducts(getAllProducts());
-      setMessage(`Product added successfully! Hash: ${newProduct.hash}`);
-      setFormData({ id: '', name: '', description: '' });
+      setMessage(`Product added successfully! ID: ${newProduct.id}, Hash: ${newProduct.hash}`);
+      setFormData({ name: '', description: '' });
     } catch (error) {
       setMessage('Error adding product');
     }
@@ -64,21 +96,101 @@ export default function AdminPage() {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('isLoggedIn');
     }
+    setShowAvatarMenu(false);
     router.push('/');
   };
 
-  if (!isLoggedIn) {
-    return <div>Loading...</div>;
+  const toggleAvatarMenu = () => {
+    setShowAvatarMenu(!showAvatarMenu);
+  };
+
+  if (!isClient || !isLoggedIn) {
+    return (
+      <div className="container">
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+          <h2>Loading...</h2>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container">
-      <div className="navigation">
-        <a href="/">Home</a>
-        <a href="/products">View All Products</a>
-        <button onClick={handleLogout} className="btn btn-secondary">
-          Logout
-        </button>
+      <div className="navigation" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <a href="/">Home</a>
+          <a href="/products">View All Products</a>
+        </div>
+        
+        <div ref={avatarRef} style={{ position: 'relative' }}>
+          <button 
+            onClick={toggleAvatarMenu}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#007bff',
+              color: 'white',
+              fontSize: '16px',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            👤
+          </button>
+          
+          {showAvatarMenu && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              right: '0',
+              backgroundColor: 'white',
+              border: '1px solid #ddd',
+              borderRadius: '8px',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+              minWidth: '150px',
+              zIndex: 1000,
+              marginTop: '5px'
+            }}>
+              <div style={{ padding: '8px 0' }}>
+                <div style={{ 
+                  padding: '8px 16px', 
+                  fontSize: '14px', 
+                  color: '#666',
+                  borderBottom: '1px solid #eee'
+                }}>
+                  info@taarifa.com
+                </div>
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    width: '100%',
+                    padding: '8px 16px',
+                    border: 'none',
+                    background: 'none',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    color: '#dc3545'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f8f9fa';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <h1>Product Management</h1>
@@ -86,19 +198,7 @@ export default function AdminPage() {
       <div className="form-container">
         <h2>Add New Product</h2>
         
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="id">Product ID:</label>
-            <input
-              type="text"
-              id="id"
-              name="id"
-              value={formData.id}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
+        <form onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
           <div className="form-group">
             <label htmlFor="name">Product Name:</label>
             <input
@@ -108,7 +208,15 @@ export default function AdminPage() {
               value={formData.name}
               onChange={handleInputChange}
               required
+              minLength={5}
             />
+            <div style={{ 
+              fontSize: '12px', 
+              color: formData.name.length < 5 ? '#dc3545' : '#28a745',
+              marginTop: '5px'
+            }}>
+              {formData.name.length}/5 characters minimum
+            </div>
           </div>
 
           <div className="form-group">
@@ -120,10 +228,27 @@ export default function AdminPage() {
               onChange={handleInputChange}
               rows={4}
               required
+              minLength={5}
             />
+            <div style={{ 
+              fontSize: '12px', 
+              color: formData.description.length < 5 ? '#dc3545' : '#28a745',
+              marginTop: '5px'
+            }}>
+              {formData.description.length}/5 characters minimum
+            </div>
           </div>
 
-          <button type="submit" className="btn btn-success">
+          <button 
+            type="submit" 
+            className="btn btn-success"
+            disabled={formData.name.length < 5 || formData.description.length < 5}
+            style={{
+              width: '100%',
+              opacity: (formData.name.length < 5 || formData.description.length < 5) ? 0.6 : 1,
+              cursor: (formData.name.length < 5 || formData.description.length < 5) ? 'not-allowed' : 'pointer'
+            }}
+          >
             Add Product
           </button>
 
@@ -134,7 +259,12 @@ export default function AdminPage() {
               backgroundColor: message.includes('successfully') ? '#d4edda' : '#f8d7da',
               color: message.includes('successfully') ? '#155724' : '#721c24',
               borderRadius: '5px',
-              border: `1px solid ${message.includes('successfully') ? '#c3e6cb' : '#f5c6cb'}`
+              border: `1px solid ${message.includes('successfully') ? '#c3e6cb' : '#f5c6cb'}`,
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              maxWidth: '100%',
+              fontSize: '14px',
+              lineHeight: '1.4'
             }}>
               {message}
             </div>
@@ -147,15 +277,22 @@ export default function AdminPage() {
         <div className="product-list">
           {products.map((product) => (
             <div key={product.id} className="product-card">
-              <h3>{product.name}</h3>
-              <p><strong>ID:</strong> {product.id}</p>
-              <p><strong>Description:</strong> {product.description}</p>
-              <p><strong>Hash:</strong> <code>{product.hash}</code></p>
+              <h3 style={{ wordBreak: 'break-word', marginBottom: '10px' }}>{product.name}</h3>
+              <p style={{ wordBreak: 'break-word', marginBottom: '8px' }}><strong>ID:</strong> {product.id}</p>
+              <p style={{ wordBreak: 'break-word', marginBottom: '8px' }}><strong>Description:</strong> {product.description}</p>
+              <p style={{ wordBreak: 'break-all', marginBottom: '8px' }}><strong>Hash:</strong> <code style={{ 
+                backgroundColor: '#f8f9fa', 
+                padding: '2px 6px', 
+                borderRadius: '3px',
+                fontSize: '12px',
+                wordBreak: 'break-all'
+              }}>{product.hash}</code></p>
               <a 
                 href={`/product?hash=${product.hash}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
+                style={{ width: '100%', display: 'block', textAlign: 'center' }}
               >
                 View Product
               </a>

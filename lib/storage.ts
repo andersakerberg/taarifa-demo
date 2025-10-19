@@ -28,10 +28,13 @@ const saveProducts = () => {
   }
 };
 
-export const addProduct = (product: Omit<Product, 'hash'>): Product => {
-  const hash = CryptoJS.SHA256(`${product.id}-${product.name}-${Date.now()}`).toString();
+export const addProduct = (product: Omit<Product, 'id' | 'hash'>): Product => {
+  // Generate a unique ID based on timestamp and random number
+  const id = `PRD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+  const hash = CryptoJS.SHA256(`${id}-${product.name}-${Date.now()}`).toString();
   const newProduct: Product = {
     ...product,
+    id,
     hash
   };
   products.push(newProduct);

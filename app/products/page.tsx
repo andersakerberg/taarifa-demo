@@ -1,13 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getAllProducts } from '@/lib/storage';
+import { getAllProducts, Product } from '@/lib/storage';
 import QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState(getAllProducts());
+  const [products, setProducts] = useState<Product[]>([]);
   const [qrCodes, setQrCodes] = useState<{ [key: string]: string }>({});
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // Set client-side flag and load products
+    setIsClient(true);
+    setProducts(getAllProducts());
+  }, []);
 
   useEffect(() => {
     // Generate QR codes for all products
@@ -61,6 +68,20 @@ export default function ProductsPage() {
     });
   }, [products, qrCodes]);
 
+  if (!isClient) {
+    return (
+      <div className="container">
+        <div className="navigation">
+          <a href="/">Home</a>
+          <a href="/admin">Admin Panel</a>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+          <h2>Loading...</h2>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <div className="navigation">
@@ -73,10 +94,10 @@ export default function ProductsPage() {
       </h1>
 
       {products.length === 0 ? (
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
-          <h2>No products found</h2>
-          <p>Products will appear here once they are added through the admin panel.</p>
-          <a href="/admin" className="btn">Go to Admin Panel</a>
+        <div style={{ textAlign: 'center', marginTop: '50px', color: '#333' }}>
+          <h2 style={{ color: '#333' }}>No products found</h2>
+          <p style={{ color: '#666' }}>Products will appear here once they are added through the admin panel.</p>
+          <a href="/admin" className="btn" style={{ width: '100%', display: 'block' }}>Go to Admin Panel</a>
         </div>
       ) : (
         <div className="product-list">
@@ -110,6 +131,7 @@ export default function ProductsPage() {
                       width: '200px', 
                       height: '200px', 
                       backgroundColor: '#f8f9fa', 
+                      color: '#666',
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center',
@@ -139,6 +161,7 @@ export default function ProductsPage() {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="btn btn-secondary"
+                  style={{ width: '100%', display: 'block' }}
                 >
                   View Product Details
                 </a>

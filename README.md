@@ -7,7 +7,7 @@ A React Next.js application for managing products with QR codes and barcodes. Th
 ### Page 1 - Login & Admin Panel
 - **Login System**: Secure login with credentials `info@taarifa.com` / `Test123`
 - **Auto-fill Button**: Convenient button to auto-populate login credentials
-- **Product Form**: Add products with ID, Name, Description (Hash auto-generated)
+- **Product Form**: Add products with Name and Description (ID and Hash auto-generated)
 - **In-memory Storage**: Products stored in memory during session
 - **Product Management**: View all added products with their details
 
@@ -69,7 +69,7 @@ For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
    - Username: `info@taarifa.com`
    - Password: `Test123`
 
-2. **Add Products**: Fill in the product form with ID, Name, and Description
+2. **Add Products**: Fill in the product form with Name and Description (ID and Hash are auto-generated)
 
 3. **View Products**: 
    - Admin panel shows all products
